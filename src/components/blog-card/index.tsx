@@ -29,7 +29,7 @@ const BlogPreview: React.FC<IBlogPostMetaData> = ({
   return (
     <motion.div
       onClick={navigateToPost}
-      className="border border-gray-300 rounded p-4 cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col"
+      className="border border-gray-300 rounded p-4 cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col bg-white"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

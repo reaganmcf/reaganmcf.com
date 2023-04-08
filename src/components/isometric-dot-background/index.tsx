@@ -40,8 +40,8 @@ const IsometricDotBackground: React.FC = () => {
         zIndex: -1,
         pointerEvents: "none",
         background: `
-          radial-gradient(circle ${dotSize}px at 0 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 99%) 0 0 / ${dotSpacing * 2}px ${dotSpacing * 2}px,
-          radial-gradient(circle ${dotSize}px at ${dotSpacing}px ${dotSpacing}px, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 99%) 0 0 / ${dotSpacing * 2}px ${dotSpacing * 2}px
+          radial-gradient(circle ${dotSize}px at 0 0, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0) 99%) 0 0 / ${dotSpacing * 2}px ${dotSpacing * 2}px,
+          radial-gradient(circle ${dotSize}px at ${dotSpacing}px ${dotSpacing}px, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0) 99%) 0 0 / ${dotSpacing * 2}px ${dotSpacing * 2}px
         `,
         transform: "translate(-50%, -50%) rotate(45deg)",
         backgroundSize: `${dotSpacing * 2}px ${dotSpacing * 2}px`,

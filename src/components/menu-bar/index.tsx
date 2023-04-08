@@ -2,13 +2,13 @@ const MenuBar: React.FC = () => {
   return (
     <nav className="flex items-center justify-between w-full">
       <div>
-        <div className="block sm:hidden">
+        <div className="block sm:hidden cursor-pointer hover:scale-105 transition-all duration-150">
           <a href="/" className="text-2xl font-semibold">
             rmcf.com
           </a>
         </div>
 
-        <div className="hidden sm:block">
+        <div className="hidden sm:block cursor-pointer hover:scale-105 transition-all duration-150">
           <a href="/" className="text-2xl font-semibold">
             reaganmcf.com
           </a>
@@ -16,10 +16,10 @@ const MenuBar: React.FC = () => {
       </div>
       <div className="flex gap-2">
         <a
-          href="https://github.com/your-username"
+          href="https://github.com/reaganmcf"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-800 hover:text-blue-600 mx-2"
+          className="rounded cursor-pointer hover:scale-105 transition-all duration-150 mx-2"
         >
           <svg
             className="h-6 w-6"
@@ -30,10 +30,10 @@ const MenuBar: React.FC = () => {
           </svg>
         </a>
         <a
-          href="https://www.linkedin.com/in/your-username"
+          href="https://www.linkedin.com/in/reaganmcf"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-800 hover:text-blue-600 mx-2"
+          className="rounded cursor-pointer hover:scale-105 transition-all duration-150 mx-2"
         >
           <svg
             className="h-6 w-6"
@@ -44,10 +44,10 @@ const MenuBar: React.FC = () => {
           </svg>
         </a>
         <a
-          href="https://twitter.com/your-username"
+          href="https://twitter.com/reaganmcf_"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-800 hover:text-blue-600 mx-2"
+          className="rounded cursor-pointer hover:scale-105 transition-all duration-150 mx-2"
         >
           <svg
             className="h-6 w-6"
