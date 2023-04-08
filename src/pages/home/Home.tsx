@@ -22,7 +22,7 @@ const blogPosts: IBlogPostMetaData[] = [
       "I started learning and using Rust just under 4 months ago. After reading a few books, watching hundreds of videos, and many projects later, here is what I have learned",
     slug: "four_months_of_rust",
     tags: ["rust", "review", "programming"],
-    readingTime: 10,
+    readingTime: 7,
   },
 ];
 
