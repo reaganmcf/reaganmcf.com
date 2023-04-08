@@ -358,3 +358,7 @@ const BlogPost = () => {
 
 export default BlogPost;
 ```
+
+I want to change it so that the code blocks have syntax highlighting and have a nice background. I want it to be themed using something like Gruvbox
+
+

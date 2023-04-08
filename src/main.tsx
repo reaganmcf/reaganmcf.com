@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     path: "/",
     Component: Home,
   }, {
-    path: "/blog/memory-arenas",
+    path: "/blog/*",
     Component: BlogPost
   }
 ]);

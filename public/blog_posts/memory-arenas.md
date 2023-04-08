@@ -1,14 +1,10 @@
-+++
-title="Memory Arenas - a Rust programmer's best friend"
-description="As an intermediate Rust programmer, one data structure I find myself using time and time again in my Rust projects is the Memory. In other languages, this data structure doesn't have as much usefulness, but I have found it to be a real superstar in Rust."
-date=2022-06-09
-
-[taxonomies]
-tags = ["rust", "memory-arenas", "intermediate"]
-categories = ["programming"]
-+++
-
-As an intermediate Rust programmer, one data structure I find myself using time and time again in my Rust projects is the Memory Arena. In other languages, this data structure doesn't have as much usefulness, but I have found it to be a real superstar in my Rust projects.
+---
+title: "Memory Arenas: A Rust Programmer's Best Friend"
+description: "As an intermediate Rust programmer, one data structure I find myself using time and time again in my Rust projects is the Memory Arena. In other languages, this data structure doesn't have as much usefulness, but I have found it to be a real superstar in my Rust projects."
+date: 2022-06-09
+readingTime: 10
+tags: ["rust", "plt", "data-struct"]
+---
 
 ## What is it?
 
@@ -22,7 +18,7 @@ Often when you are writing an interpreter for a programming language, you're dea
 
 Scopes just provide a way to define new variables and look up the values for existing variables. Let's define some `Scope` and `Value` structs for this subset of nakala to paint a better picture:
 
-```rs
+```rust
 #[derive(Clone)]
 pub enum Value {
   Int(i64),
@@ -45,7 +41,7 @@ impl Scope {
 
 Let's also define the `RuntimeError` type that we will use in `get`, `define`, and `assign`
 
-```rs
+```rust
 pub enum RuntimeError {
   UndefinedVariable,
   VariableAlreadyExists
@@ -54,7 +50,7 @@ pub enum RuntimeError {
 
 Lastly, let's define the `get`, `assign`, and `define` functions for our Scope
 
-```rs
+```rust
 impl Scope {
   ...,
   
@@ -99,7 +95,8 @@ if someCondition {
 ```
 
 Let's visualize what these scopes look like by the time it's about to evaluate `x = 5`;
-```
+
+```text
   ┌─────────────────────┐
   │Scope 1              │
   │  - x = Val::Int(10) │
@@ -113,7 +110,8 @@ Let's visualize what these scopes look like by the time it's about to evaluate `
 As you can see Scope 2 does not know that `x` is a variable, and it will end up returning `RuntimeError::UndefinedVariable`. 
 
 What we want is something like this:
-```
+
+```text
   ┌────────────────────┐
   │Scope 1             │
   │  - x = Val::Int(10)│
@@ -129,7 +127,7 @@ With this new design, we would be able to recursively `get`, `assign` and `defin
 
 To do this, we need a way to "enclose" the new scope with the current scope before interpreting the body of the if statement. Let's redo our `Scope` struct
 
-```rs
+```rust
 struct Scope {
   values: HashMap<String, Value>,
   enclosing: Option<Box<&mut Scope>>
@@ -186,7 +184,7 @@ impl Struct {
 
 Now we have borrow checker errors everywhere because we have to annotate the lifetime of the `Box<&mut Scope>` inside the `Struct` definition.
 
-```
+```console
    Compiling playground v0.0.1 (/playground)
 error[E0425]: cannot find value `enclosing` in this scope
   --> src/main.rs:25:7
@@ -223,7 +221,7 @@ In our interpreter, we will be passing around a new data structure, our `Environ
 
 Let's start with our new `Scope` and `ScopeId` definitions:
 
-```rs
+```rust
 type ScopeId = usize;
 
 struct Scope {
@@ -237,7 +235,7 @@ We now reference a Scope via an unsized integer, or `ScopeId`.
 
 Our `get`, `assign` and `define` functions are back to what they were in our first iteration:
 
-```rs
+```rust
 impl Scope {
   pub fn new(id: ScopeId, enclosing: Option<ScopeId>) -> Self {
     Self {
@@ -277,7 +275,7 @@ impl Scope {
 
 Now let's define our `Environment`
 
-```rs
+```rust
 pub struct Environment {
   scopes: Vec<Scope>, // our scope memory arena!
   next_scope_id: ScopeId
@@ -295,7 +293,7 @@ impl Environment {
 
 Our interpreter will want a way to be able to begin and end scopes as it walks our AST, so let's add those functions to our API.
 
-```rs
+```rust
 impl Environment {
   ...,
 
@@ -312,7 +310,7 @@ impl Environment {
 
 Notice how `begin_scope` returns a `ScopeId`. Instead of returning a `&mut Scope`, it returns this Id which it will then use to perform `get`, `assign` and `define`, like so:
 
-```rs
+```rust
 impl Environment {
   ...,
 

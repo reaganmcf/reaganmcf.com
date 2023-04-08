@@ -1,9 +1,29 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import ProjectCard from "./../../components/project-card";
 import PageLayout from "../layout";
 import MenuBar from "../../components/menu-bar";
+import BlogPreview, { IBlogPostMetaData } from "../../components/blog-card";
+
+const blogPosts: IBlogPostMetaData[] = [
+  {
+    title: "Memory Arenas: A Rust Programmer's Best Friend",
+    date: new Date(Date.parse("2021-07-17")),
+    description: "Why the memory arena is one of my favorite data structures and how I use it in nakala",
+    slug: 'memory-arenas',
+    tags: ["rust", "plt", "data structures"],
+    readingTime: 10
+  },
+  {
+    title: "4 months of Rust - what I've learned",
+    date: new Date(Date.parse("2021-07-17")),
+    description: "I started learning and using Rust just under 4 months ago. After reading a few books, watching hundreds of videos, and many projects later, here is what I have learned",
+    slug: 'four_months_of_rust',
+    tags: ["rust", "review", "programming"],
+    readingTime: 10
+  },
+];
+
 
 const HomePage: React.FC = () => {
   return (
@@ -15,7 +35,7 @@ const HomePage: React.FC = () => {
         className="font-sans min-h-screen"
       >
         <header className="flex justify-end p-8">
-          <MenuBar/>
+          <MenuBar />
         </header>
 
         <section className="p-8">
@@ -25,6 +45,21 @@ const HomePage: React.FC = () => {
             passion for programming languages, and solving complicated problems.
           </p>
         </section>
+
+        <section className="p-8">
+          <div>
+            <h2 className="text-2xl font-semibold">Blog Posts</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+              {blogPosts.map((post) => (
+                <BlogPreview
+                  key={post.slug}
+                  {...post}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         <section className="p-8">
           <div className="mb-8">
@@ -74,6 +109,7 @@ const HomePage: React.FC = () => {
             />
           </div>
         </section>
+
       </motion.div>
     </PageLayout>
   );
